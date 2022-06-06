@@ -35,7 +35,6 @@ const Home: NextPage = () => {
           <button onClick={() => signOut()}>Sign out</button>
         </>
       )}
-      <Members />
     </Layout>
   );
 };
