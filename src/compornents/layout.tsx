@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
 type Props = {
   children?: React.ReactNode;
@@ -10,6 +11,7 @@ type Props = {
 
 export default function Layout({ children, title, description }: Props) {
   const router = useRouter();
+  const { data: session } = useSession();
   console.log(router.asPath);
   const pageTitle = title || "Home";
   return (
@@ -32,7 +34,11 @@ export default function Layout({ children, title, description }: Props) {
           <li>
             <Link href="/contact">Contact</Link>
           </li>
-          <li></li>
+          {router.isReady && session && (
+            <li>
+              <Link href="/Members">Members</Link>
+            </li>
+          )}
         </ul>
       </nav>
       <main>{children}</main>
